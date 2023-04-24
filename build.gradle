@@ -43,6 +43,7 @@ dependencies {
     implementation group: 'org.slf4j', name: 'slf4j-simple', version: "${slf4jSimpleVersion}"
     testImplementation group: 'junit', name: 'junit', version: "${junitVersion}"
     implementation group: 'net.serenity-bdd', name: 'serenity-screenplay-rest', version: "${serenityVersion}"
+    implementation 'com.google.code.gson:gson:2.8.9'
 }
 
 serenity {
