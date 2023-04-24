@@ -8,11 +8,19 @@ Feature: Validate the Create, Read, Update, Delete of employee
   I want to access Dummy's Rest API platform services
   for employee information management
 
+  Background: Access the service
+    Given Access the platform resource
 
   @CasePost
-  Scenario: Creation an employee
+  Scenario Outline: Creation an employee
     When you create an employee
+      | <name> | <salary> | <age> |
     Then Create new record in database
+
+    Examples:
+      | name  | salary | age |
+      | Julio | 1000   | 45  |
+
 
   @CaseGetAll
   Scenario: Consultation of all employee records
