@@ -22,35 +22,45 @@ Feature: Validate the Create, Read, Update, Delete of Api employee
       | Julio | 1000   | 45  |
 
   @CaseGetAll
-  Scenario: Consultation of all employee records
+  Scenario Outline: Consultation of all employee records
     When employee records are consulted
-    Then verify that you get all employee data
+    Then verify service response
+      | <message> |
+    Examples:
+      | message                                     |
+      | Successfully! All records has been fetched. |
 
 
   @CaseGet
   Scenario Outline: Consult employee
     When employee's record is consulted
       | <id> |
-    Then verify that get a single employee data
+    Then verify service response
       | <message> |
 
     Examples:
       | id | message                                |
-      | 1  | Successfully! Record has been fetched. |
+      | 2  | Successfully! Record has been fetched. |
 
 
   @CasePut
   Scenario Outline: Modify employee record
     When employee information is modified
       | <id> | <name> | <salary> | <age> |
-    Then verify the update of a record
+    Then verify service response
       | <message> |
     Examples:
       | id | name  | salary | age | message                                |
-      | 23  | Maria | 1000   | 45  | Successfully! Record has been updated. |
+      | 23 | Maria | 1000   | 45  | Successfully! Record has been updated. |
 
 
   @CaseDelete
-  Scenario: Delete employee record
+  Scenario Outline: Delete employee record
     When employee registration is eliminated
-    Then verify the delete of a record
+      | <id> |
+    Then verify service response
+      | <message> |
+
+    Examples:
+      | id | message                               |
+      | 1  | Successfully! Record has been deleted |
