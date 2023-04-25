@@ -1,10 +1,7 @@
 package com.restapi.dummy.stepdefinitions;
 
 import com.restapi.dummy.models.EmployeeModel;
-import com.restapi.dummy.task.ConsulEmployeeTask;
-import com.restapi.dummy.task.ConsultAllEmployeeTask;
-import com.restapi.dummy.task.CreateEmployeeTask;
-import com.restapi.dummy.task.UpdateEmployeeTask;
+import com.restapi.dummy.task.*;
 import com.restapi.dummy.utils.ConverterJson;
 import io.cucumber.java.Before;
 import io.cucumber.java.en.Given;
@@ -58,51 +55,32 @@ public class CrudEmployeeStepDefinition {
         );
     }
 
-    @Then("verify that you get all employee data")
-    public void verifyThatYouGetAllEmployeeData() {
-        assertThat(lastResponse().getStatusCode()).isEqualTo(200);
-    }
-
     @When("employee's record is consulted")
     public void employeeSRecordIsConsulted(List<List<String>> dataEmployee) {
         theActorInTheSpotlight().attemptsTo(
                 ConsulEmployeeTask.consultEmployee(dataEmployee.get(0).get(0))
         );
-
-    }
-
-    @Then("verify that get a single employee data")
-    public void verifyThatGetASingleEmployeeData(List<List<String>> dataEmployee) {
-        JsonPath responseJson = JsonPath.given(lastResponse().getBody().asString());
-        assertThat(lastResponse().getStatusCode()).isEqualTo(200);
-        assertThat(responseJson.getString("message")).isEqualTo(dataEmployee.get(0).get(0));
-
     }
 
     @When("employee information is modified")
     public void employeeInformationIsModified(List<List<String>> dataEmployee) {
         employee = new EmployeeModel(dataEmployee.get(0));
         theActorInTheSpotlight().attemptsTo(
-                UpdateEmployeeTask.updateEmployee(ConverterJson.converter(employee),dataEmployee.get(0).get(0))
-
+                UpdateEmployeeTask.updateEmployee(ConverterJson.converter(employee), dataEmployee.get(0).get(0))
         );
     }
 
-    @Then("verify the update of a record")
-    public void verifyTheUpdateOfARecord(List<List<String>> dataEmployee) {
+    @When("employee registration is eliminated")
+    public void employeeRegistrationIsEliminated(List<List<String>> dataEmployee) {
+        theActorInTheSpotlight().attemptsTo(
+                DeleteEmployeeTask.deleteEmployee(dataEmployee.get(0).get(0))
+        );
+    }
+
+    @Then("verify service response")
+    public void verifyServiceResponse(List<List<String>> dataEmployee) {
         JsonPath responseJson = JsonPath.given(lastResponse().getBody().asString());
         assertThat(lastResponse().getStatusCode()).isEqualTo(200);
         assertThat(responseJson.getString("message")).isEqualTo(dataEmployee.get(0).get(0));
-
-    }
-
-    @When("employee registration is eliminated")
-    public void employeeRegistrationIsEliminated() {
-
-    }
-
-    @Then("verify the delete of a record")
-    public void verifyTheDeleteOfARecord() {
-
     }
 }

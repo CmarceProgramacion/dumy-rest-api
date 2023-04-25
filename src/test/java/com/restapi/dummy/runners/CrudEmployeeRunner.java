@@ -8,7 +8,7 @@ import org.junit.runner.RunWith;
 @CucumberOptions(
         features = "src/test/resources/features/crud_employee.feature",
         glue = "com.restapi.dummy",
-        tags = "@CasePut",
+        tags = "@CaseGet",
         plugin = {"pretty"},
         snippets = CucumberOptions.SnippetType.CAMELCASE)
 
