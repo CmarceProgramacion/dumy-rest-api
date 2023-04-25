@@ -4,6 +4,7 @@ import com.restapi.dummy.models.EmployeeModel;
 import com.restapi.dummy.task.ConsulEmployeeTask;
 import com.restapi.dummy.task.ConsultAllEmployeeTask;
 import com.restapi.dummy.task.CreateEmployeeTask;
+import com.restapi.dummy.task.UpdateEmployeeTask;
 import com.restapi.dummy.utils.ConverterJson;
 import io.cucumber.java.Before;
 import io.cucumber.java.en.Given;
@@ -79,12 +80,19 @@ public class CrudEmployeeStepDefinition {
     }
 
     @When("employee information is modified")
-    public void employeeInformationIsModified() {
+    public void employeeInformationIsModified(List<List<String>> dataEmployee) {
+        employee = new EmployeeModel(dataEmployee.get(0));
+        theActorInTheSpotlight().attemptsTo(
+                UpdateEmployeeTask.updateEmployee(ConverterJson.converter(employee),dataEmployee.get(0).get(0))
 
+        );
     }
 
     @Then("verify the update of a record")
-    public void verifyTheUpdateOfARecord() {
+    public void verifyTheUpdateOfARecord(List<List<String>> dataEmployee) {
+        JsonPath responseJson = JsonPath.given(lastResponse().getBody().asString());
+        assertThat(lastResponse().getStatusCode()).isEqualTo(200);
+        assertThat(responseJson.getString("message")).isEqualTo(dataEmployee.get(0).get(0));
 
     }
 

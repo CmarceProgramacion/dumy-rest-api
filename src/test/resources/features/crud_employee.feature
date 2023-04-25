@@ -40,9 +40,15 @@ Feature: Validate the Create, Read, Update, Delete of Api employee
 
 
   @CasePut
-  Scenario: Modify employee record
+  Scenario Outline: Modify employee record
     When employee information is modified
+      | <id> | <name> | <salary> | <age> |
     Then verify the update of a record
+      | <message> |
+    Examples:
+      | id | name  | salary | age | message                                |
+      | 23  | Maria | 1000   | 45  | Successfully! Record has been updated. |
+
 
   @CaseDelete
   Scenario: Delete employee record
