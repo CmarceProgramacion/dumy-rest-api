@@ -8,9 +8,9 @@ import org.junit.runner.RunWith;
 @CucumberOptions(
         features = "src/test/resources/features/crud_employee.feature",
         glue = "com.restapi.dummy",
-        tags = "@CasePost",
+        tags = "@CaseGet",
         plugin = {"pretty"},
-        snippets = CucumberOptions.SnippetType.CAMELCASE
-)
+        snippets = CucumberOptions.SnippetType.CAMELCASE)
+
 public class CrudEmployeeRunner {
 }
