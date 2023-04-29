@@ -6,7 +6,7 @@
 Feature: Validate the Create, Read, Update, Delete of Api employee
   As an user
   I want to access Dummy's Rest API platform services
-  for employee information management
+  To employee information management
 
   Background: Access the service
     Given access to the platform services
