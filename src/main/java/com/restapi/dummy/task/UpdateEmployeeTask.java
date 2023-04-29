@@ -4,7 +4,6 @@ import net.serenitybdd.screenplay.Actor;
 import net.serenitybdd.screenplay.Task;
 import net.serenitybdd.screenplay.rest.interactions.Put;
 
-import static com.restapi.dummy.utils.enums.RestServiceEnum.BASE_URL;
 import static com.restapi.dummy.utils.enums.RestServiceEnum.URI_UPDATE_EMPLOYEE;
 import static net.serenitybdd.screenplay.Tasks.instrumented;
 
@@ -24,7 +23,6 @@ public class UpdateEmployeeTask implements Task {
 
     @Override
     public <T extends Actor> void performAs(T actor) {
-        System.out.println("empleado " + employeeJson + "base url" + BASE_URL.toString() + "" + URI_UPDATE_EMPLOYEE + idEmployee);
         actor.attemptsTo(
                 Put.to(URI_UPDATE_EMPLOYEE + idEmployee)
                         .with(request -> request

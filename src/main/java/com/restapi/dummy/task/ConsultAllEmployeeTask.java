@@ -12,6 +12,7 @@ public class ConsultAllEmployeeTask implements Task {
     public static ConsultAllEmployeeTask consultEmployee() {
         return instrumented(ConsultAllEmployeeTask.class);
     }
+
     @Override
     public <T extends Actor> void performAs(T actor) {
         actor.attemptsTo(
