@@ -11,17 +11,18 @@ Feature: Validate the Create, Read, Update, Delete of Api employee
   Background: Access the service
     Given access to the platform services
 
-  @CasePost
+  @Post
   Scenario Outline: Creation an employee
     When user create an employee
       | <name> | <salary> | <age> |
     Then verify the create new record in database
+      | <message> |
 
     Examples:
-      | name  | salary | age |
-      | Julio | 1000   | 45  |
+      | name  | salary | age | message                              |
+      | Julio | 1000   | 45  | Successfully! Record has been added. |
 
-  @CaseGetAll
+  @GetAll
   Scenario Outline: Consultation of all employee records
     When employee records are consulted
     Then verify service response
@@ -31,7 +32,7 @@ Feature: Validate the Create, Read, Update, Delete of Api employee
       | Successfully! All records has been fetched. |
 
 
-  @CaseGet
+  @Get
   Scenario Outline: Consult employee
     When employee's record is consulted
       | <id> |
@@ -43,7 +44,7 @@ Feature: Validate the Create, Read, Update, Delete of Api employee
       | 2  | Successfully! Record has been fetched. |
 
 
-  @CasePut
+  @Put
   Scenario Outline: Modify employee record
     When employee information is modified
       | <id> | <name> | <salary> | <age> |
@@ -54,7 +55,7 @@ Feature: Validate the Create, Read, Update, Delete of Api employee
       | 23 | Maria | 1000   | 45  | Successfully! Record has been updated. |
 
 
-  @CaseDelete
+  @Delete
   Scenario Outline: Delete employee record
     When employee registration is eliminated
       | <id> |

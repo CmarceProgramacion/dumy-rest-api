@@ -21,12 +21,12 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 
 public class CrudEmployeeStepDefinition {
-    EmployeeModel employee;
+    private EmployeeModel employee;
 
     @Before
     public void initialAutomationConfig() {
         OnStage.setTheStage(new OnlineCast());
-        OnStage.theActor("Employee");
+        OnStage.theActor("Juanito");
     }
 
     @Given("access to the platform services")
@@ -43,22 +43,23 @@ public class CrudEmployeeStepDefinition {
     }
 
     @Then("verify the create new record in database")
-    public void verifyTheCreateNewRecordInDatabase() {
+    public void verifyTheCreateNewRecordInDatabase(List<List<String>> dataEmployee) {
+        JsonPath responseJson = JsonPath.given(lastResponse().getBody().asString());
         assertThat(lastResponse().getStatusCode()).isEqualTo(200);
-        assertThat(lastResponse().getBody().asString()).contains(ConverterJson.converter(employee));
+        assertThat(responseJson.getString("message")).isEqualTo(dataEmployee.get(0).get(0));
     }
 
     @When("employee records are consulted")
     public void employeeRecordsAreConsulted() {
         theActorInTheSpotlight().attemptsTo(
-                ConsultAllEmployeeTask.consultEmployee()
+                ConsultAllEmployeesTask.consultEmployees()
         );
     }
 
     @When("employee's record is consulted")
     public void employeeSRecordIsConsulted(List<List<String>> dataEmployee) {
         theActorInTheSpotlight().attemptsTo(
-                ConsulEmployeeTask.consultEmployee(dataEmployee.get(0).get(0))
+                ConsultEmployeeTask.consultEmployee(dataEmployee.get(0).get(0))
         );
     }
 

@@ -4,19 +4,19 @@ import net.serenitybdd.screenplay.Actor;
 import net.serenitybdd.screenplay.Task;
 import net.serenitybdd.screenplay.rest.interactions.Get;
 
-import static com.restapi.dummy.utils.enums.RestServiceEnum.URI_CONSULT_EMPLOYEE;
+import static com.restapi.dummy.utils.enums.RestServiceEnum.URI_CONSULT_EMPLOYEES;
 import static net.serenitybdd.screenplay.Tasks.instrumented;
 
-public class ConsultAllEmployeeTask implements Task {
+public class ConsultAllEmployeesTask implements Task {
 
-    public static ConsultAllEmployeeTask consultEmployee() {
-        return instrumented(ConsultAllEmployeeTask.class);
+    public static ConsultAllEmployeesTask consultEmployees() {
+        return instrumented(ConsultAllEmployeesTask.class);
     }
 
     @Override
     public <T extends Actor> void performAs(T actor) {
         actor.attemptsTo(
-                Get.resource(URI_CONSULT_EMPLOYEE.toString())
+                Get.resource(URI_CONSULT_EMPLOYEES.toString())
         );
     }
 }

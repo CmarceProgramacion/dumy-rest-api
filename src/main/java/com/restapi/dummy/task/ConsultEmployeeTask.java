@@ -7,15 +7,15 @@ import net.serenitybdd.screenplay.rest.interactions.Get;
 import static com.restapi.dummy.utils.enums.RestServiceEnum.URI_CONSULT_EMPLOYEE;
 import static net.serenitybdd.screenplay.Tasks.instrumented;
 
-public class ConsulEmployeeTask implements Task {
+public class ConsultEmployeeTask implements Task {
     private String idEmployee;
 
-    public ConsulEmployeeTask(String idEmployee) {
+    public ConsultEmployeeTask(String idEmployee) {
         this.idEmployee = idEmployee;
     }
 
-    public static ConsulEmployeeTask consultEmployee(String idEmployee) {
-        return instrumented(ConsulEmployeeTask.class, idEmployee);
+    public static ConsultEmployeeTask consultEmployee(String idEmployee) {
+        return instrumented(ConsultEmployeeTask.class, idEmployee);
     }
 
     @Override
